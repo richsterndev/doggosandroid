@@ -2,3 +2,4 @@ include ':app'
 rootProject.name = "Doggos"
 
 include ':core'
+include ':model'

@@ -1,0 +1,8 @@
+apply from: configs.kotlin.androidLibrary
+apply plugin: 'dagger.hilt.android.plugin'
+
+dependencies {
+    // Hilt
+    implementation libs.hilt.android
+    kapt libs.hilt.compiler
+}

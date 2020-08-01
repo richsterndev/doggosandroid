@@ -48,6 +48,9 @@ dependencies {
     implementation libs.hilt.lifecycle
     kapt libs.hilt.compiler
 
+    // Model
+    implementation libs.model
+
     // Arch components
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
