@@ -9,4 +9,5 @@ dependencies {
 
     // Moshi
     implementation libs.moshi.core
+    kapt libs.moshi.codegen
 }
