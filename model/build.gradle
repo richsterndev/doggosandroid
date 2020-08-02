@@ -4,5 +4,9 @@ apply plugin: 'dagger.hilt.android.plugin'
 dependencies {
     // Hilt
     implementation libs.hilt.android
+    kapt libs.hilt.androidCompiler
     kapt libs.hilt.compiler
+
+    // Moshi
+    implementation libs.moshi.core
 }

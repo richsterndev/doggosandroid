@@ -1,4 +1,6 @@
 package com.richstern.doggos.model
 
-class Breed {
-}
+data class Breed(
+    val name: String,
+    val imageUrl: String
+)

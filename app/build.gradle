@@ -37,7 +37,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation libs.kotlin.stdLib
     implementation libs.ktx.core
     implementation libs.ktx.fragment
     implementation libs.androidx.appCompat
@@ -46,6 +46,7 @@ dependencies {
     // Hilt
     implementation libs.hilt.android
     implementation libs.hilt.lifecycle
+    kapt libs.hilt.androidCompiler
     kapt libs.hilt.compiler
 
     // Model
