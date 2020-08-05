@@ -49,8 +49,9 @@ dependencies {
     kapt libs.hilt.androidCompiler
     kapt libs.hilt.compiler
 
-    // Model
+    // Projects
     implementation libs.model
+    implementation libs.randomImageQuiz
 
     // Arch components
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"

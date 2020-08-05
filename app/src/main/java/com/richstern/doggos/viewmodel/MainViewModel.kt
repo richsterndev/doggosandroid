@@ -11,7 +11,7 @@ class MainViewModel @ViewModelInject constructor(
     var loadRandomImage: LoadRandomImage
 ) : ViewModel() {
 
-    fun load() {
+    init {
         viewModelScope.launch {
             kotlin.runCatching {
                 loadRandomImage()

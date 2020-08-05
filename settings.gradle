@@ -3,3 +3,4 @@ rootProject.name = "Doggos"
 
 include ':core'
 include ':model'
+include ':random-image-quiz'
