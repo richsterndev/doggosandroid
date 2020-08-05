@@ -10,8 +10,8 @@ android {
 
     defaultConfig {
         applicationId "com.richstern.doggos"
-        minSdkVersion 27
-        targetSdkVersion 29
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.compileSdk
         versionCode 1
         versionName "1.0"
 
