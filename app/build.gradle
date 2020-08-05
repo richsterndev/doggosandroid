@@ -40,8 +40,10 @@ dependencies {
     implementation libs.kotlin.stdLib
     implementation libs.ktx.core
     implementation libs.ktx.fragment
+    implementation libs.android.material
     implementation libs.androidx.appCompat
     implementation libs.androidx.constraintLayout
+    implementation libs.androidx.viewPager2
 
     // Hilt
     implementation libs.hilt.android
