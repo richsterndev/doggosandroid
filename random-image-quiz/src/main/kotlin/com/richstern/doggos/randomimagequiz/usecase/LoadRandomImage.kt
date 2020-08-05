@@ -1,4 +1,4 @@
-package com.richstern.doggos.usecase
+package com.richstern.doggos.randomimagequiz.usecase
 
 import com.richstern.doggos.core.network.DoggosService
 import com.richstern.doggos.model.Breed

@@ -1,6 +1,16 @@
 apply from: configs.kotlin.androidLibrary
+apply plugin: 'dagger.hilt.android.plugin'
 
 dependencies {
+    implementation libs.core
+    implementation libs.model
+
     implementation libs.ktx.fragment
     implementation libs.stateMachine
+
+    // Hilt
+    implementation libs.hilt.android
+    implementation libs.hilt.lifecycle
+    kapt libs.hilt.androidCompiler
+    kapt libs.hilt.compiler
 }
