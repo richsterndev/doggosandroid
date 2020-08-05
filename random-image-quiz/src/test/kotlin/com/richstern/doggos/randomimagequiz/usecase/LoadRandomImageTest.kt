@@ -52,4 +52,23 @@ class LoadRandomImageTest {
             then(adaptRandomImageResultToBreed).should().invoke(message)
         }
     }
+
+    @Test
+    fun `given loadRandomImage returns null message, should never call adapt`() {
+        runBlockingTest {
+            // Given
+            val message = null
+            val response = ApiResponse<String>(
+                message = message,
+                status = "success"
+            )
+            given(doggosService.getRandomImage()).willReturn(response)
+
+            // When
+            loadRandomImage()
+
+            // Then
+            then(adaptRandomImageResultToBreed).shouldHaveZeroInteractions()
+        }
+    }
 }
