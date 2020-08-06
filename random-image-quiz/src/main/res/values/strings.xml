@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="quiz_input_hint">Enter your guess here</string>
+    <string name="quiz_heading">Dog Breed Quiz</string>
+    <string name="submit">Submit</string>
+</resources>
