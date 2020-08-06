@@ -8,6 +8,10 @@ dependencies {
     implementation libs.ktx.fragment
     implementation libs.stateMachine
 
+    // Arch components
+    implementation libs.androidx.lifecycle.extensions
+    implementation libs.androidx.lifecycle.viewmodel
+
     // Hilt
     implementation libs.hilt.android
     implementation libs.hilt.lifecycle
