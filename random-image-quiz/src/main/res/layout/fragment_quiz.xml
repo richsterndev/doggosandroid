@@ -7,21 +7,18 @@
         android:id="@+id/quiz_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#999900"
         android:visibility="gone" />
 
     <com.richstern.doggos.randomimagequiz.view.QuizLoadingView
         android:id="@+id/quiz_loading_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#009999"
         android:visibility="gone" />
 
     <com.richstern.doggos.randomimagequiz.view.QuizErrorView
         android:id="@+id/quiz_error_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#990099"
         android:visibility="gone" />
 
 </FrameLayout>
