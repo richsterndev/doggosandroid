@@ -5,13 +5,12 @@ dependencies {
     implementation libs.core
     implementation libs.model
 
-    implementation libs.ktx.fragment
-    implementation libs.stateMachine
-
-    // Arch components
+    implementation libs.androidx.constraintLayout
     implementation libs.androidx.lifecycle.extensions
     implementation libs.androidx.lifecycle.viewmodel
-
+    implementation libs.ktx.fragment
+    implementation libs.stateMachine
+    
     // Hilt
     implementation libs.hilt.android
     implementation libs.hilt.lifecycle
