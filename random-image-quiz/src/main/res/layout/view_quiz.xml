@@ -15,23 +15,34 @@
             android:text="Dog Breed Quiz"
             android:layout_marginTop="48dp"
             android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toTopOf="@id/quiz_view_image"/>
 
-        <ImageView
-            android:id="@+id/quiz_view_image"
+        <View
+            android:id="@+id/quiz_view_image_border"
             android:layout_width="match_parent"
             android:layout_height="240dp"
-            android:layout_marginTop="24dp"
             android:layout_marginStart="48dp"
             android:layout_marginEnd="48dp"
-            android:background="#EFEFEF"
+            android:background="#3f3f3f"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/quiz_view_heading"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toTopOf="@id/quiz_view_breed_input" />
+
+        <ImageView
+            android:id="@+id/quiz_view_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#EFEFEF"
+            android:layout_margin="4dp"
+            app:layout_constraintLeft_toLeftOf="@id/quiz_view_image_border"
+            app:layout_constraintTop_toTopOf="@id/quiz_view_image_border"
+            app:layout_constraintRight_toRightOf="@id/quiz_view_image_border"
+            app:layout_constraintBottom_toBottomOf="@id/quiz_view_image_border" />
 
         <EditText
             android:id="@+id/quiz_view_breed_input"
@@ -55,10 +66,17 @@
             android:layout_marginTop="24dp"
             android:layout_marginStart="48dp"
             android:layout_marginEnd="48dp"
+            android:layout_marginBottom="24dp"
             android:text="Submit"
+            android:textColor="#FFF"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:elevation="4dp"
+            android:background="@drawable/submit_button_background"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/quiz_view_breed_input"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
