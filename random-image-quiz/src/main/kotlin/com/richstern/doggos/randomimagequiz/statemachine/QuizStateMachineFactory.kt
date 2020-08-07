@@ -1,6 +1,5 @@
 package com.richstern.doggos.randomimagequiz.statemachine
 
-import com.richstern.doggos.randomimagequiz.usecase.LoadRandomImage
 import com.richstern.doggos.randomimagequiz.usecase.ValidateQuizGuess
 import com.tinder.StateMachine
 import javax.inject.Inject
@@ -27,7 +26,7 @@ class QuizStateMachineFactory @Inject constructor(
 
                 on<QuizEvent.LoadRandomImageSuccess> { event ->
                     transitionTo(
-                        QuizState.RandomImageLoaded(event.randomImage, resetView = true)
+                        QuizState.RandomImageLoaded(event.randomImage)
                     )
                 }
 

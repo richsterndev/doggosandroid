@@ -96,7 +96,10 @@ class QuizFragment : Fragment() {
         quizView?.isVisible = false
         quizLoadingView?.isVisible = true
         quizErrorView?.isVisible = false
-        quizSuccessView?.isVisible = false
+        quizSuccessView?.let { view ->
+            view.isVisible = false
+            view.reset()
+        }
         quizViewModel.load()
     }
 
