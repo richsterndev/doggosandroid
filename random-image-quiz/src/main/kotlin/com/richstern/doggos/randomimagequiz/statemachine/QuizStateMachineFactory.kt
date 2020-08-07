@@ -42,17 +42,11 @@ class QuizStateMachineFactory @Inject constructor(
                     transitionTo(QuizState.HelpRequested(randomImage))
                 }
 
-                on<QuizEvent.HelpConfirmed> {
-                    transitionTo(QuizState.RandomImageLoaded(randomImage, withHint = true))
-                }
-
                 on<QuizEvent.Submit> { event ->
                     if (validateQuizGuess(event.guess, randomImage)) {
                         transitionTo(QuizState.Success(randomImage))
                     } else {
-                        transitionTo(
-                            QuizState.RandomImageLoaded(randomImage, withIncorrectGuess = true)
-                        )
+                        dontTransition(QuizEffect.IncorrectGuess)
                     }
                 }
             }
@@ -61,7 +55,10 @@ class QuizStateMachineFactory @Inject constructor(
             state<QuizState.HelpRequested> {
 
                 on<QuizEvent.HelpConfirmed> {
-                    transitionTo(QuizState.RandomImageLoaded(randomImage, withHint = true))
+                    transitionTo(
+                        state = QuizState.RandomImageLoaded(randomImage),
+                        sideEffect = QuizEffect.DisplayHint(randomImage.name)
+                    )
                 }
 
                 on<QuizEvent.HelpDeclined> {

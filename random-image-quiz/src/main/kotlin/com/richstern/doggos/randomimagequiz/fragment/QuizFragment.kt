@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.richstern.doggos.randomimagequiz.R
+import com.richstern.doggos.randomimagequiz.statemachine.QuizEffect
 import com.richstern.doggos.randomimagequiz.statemachine.QuizEvent
 import com.richstern.doggos.randomimagequiz.statemachine.QuizState
 import com.richstern.doggos.randomimagequiz.view.QuizErrorView
@@ -50,6 +51,12 @@ class QuizFragment : Fragment() {
                 is QuizState.RandomImageLoaded -> bindLoadedImage(quizState)
                 is QuizState.HelpRequested -> displayHelpDialog()
                 is QuizState.Success -> displaySuccess(quizState)
+            }
+        })
+        quizViewModel.quizEffect.observe(viewLifecycleOwner, Observer { quizEffect ->
+            when (quizEffect) {
+                is QuizEffect.IncorrectGuess -> quizView?.onIncorrectGuess()
+                is QuizEffect.DisplayHint -> quizView?.onDisplayHint(quizEffect)
             }
         })
     }

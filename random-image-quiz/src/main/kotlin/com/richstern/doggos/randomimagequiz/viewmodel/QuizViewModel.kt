@@ -18,9 +18,12 @@ class QuizViewModel @ViewModelInject constructor(
 
     val quizState: LiveData<QuizState>
         get() = Transformations.distinctUntilChanged(_quizState)
+    val quizEffect: LiveData<QuizEffect>
+        get() = _quizEffect
 
     private val stateMachine = stateMachineFactory.create()
     private val _quizState = MutableLiveData<QuizState>()
+    private val _quizEffect = MutableLiveData<QuizEffect>()
 
     fun triggerEvent(event: QuizEvent) {
         val transition = stateMachine.transition(event)
@@ -47,6 +50,6 @@ class QuizViewModel @ViewModelInject constructor(
     }
 
     private fun handleSideEffect(quizEffect: QuizEffect) {
-
+        _quizEffect.value = quizEffect
     }
 }

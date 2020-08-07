@@ -15,6 +15,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.richstern.doggos.randomimagequiz.R
+import com.richstern.doggos.randomimagequiz.statemachine.QuizEffect
 import com.richstern.doggos.randomimagequiz.statemachine.QuizState
 
 class QuizView(context: Context, attrs: AttributeSet) : ScrollView(context, attrs) {
@@ -67,18 +68,6 @@ class QuizView(context: Context, attrs: AttributeSet) : ScrollView(context, attr
                 }
             })
             .into(imageView)
-
-        if (quizState.withHint) {
-            inputTextView.setText(quizState.randomImage.name)
-        }
-
-        if (quizState.withIncorrectGuess) {
-            Toast.makeText(
-                context,
-                "Incorrect guess.  Try again!",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
     }
 
     fun reset() {
@@ -96,6 +85,18 @@ class QuizView(context: Context, attrs: AttributeSet) : ScrollView(context, attr
         shimmerView.clearAnimation()
         shimmerView.visibility = INVISIBLE
         imageView.visibility = VISIBLE
+    }
+
+    fun onIncorrectGuess() {
+        Toast.makeText(
+            context,
+            "Incorrect guess.  Try again!",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    fun onDisplayHint(quizEffect: QuizEffect.DisplayHint) {
+        inputTextView.setText(quizEffect.name)
     }
 
     interface Listener {
