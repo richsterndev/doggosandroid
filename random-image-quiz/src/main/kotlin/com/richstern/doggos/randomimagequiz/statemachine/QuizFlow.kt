@@ -8,6 +8,9 @@ sealed class QuizState {
     data class RandomImageLoaded(
         val randomImage: Breed
     ) : QuizState()
+    data class RandomImageError(
+        val throwable: Throwable
+    ) : QuizState()
 }
 
 sealed class QuizEvent {
@@ -18,6 +21,7 @@ sealed class QuizEvent {
     data class LoadRandomImageError(
         val throwable: Throwable
     ) : QuizEvent()
+    object Help : QuizEvent()
 }
 
 sealed class QuizEffect {

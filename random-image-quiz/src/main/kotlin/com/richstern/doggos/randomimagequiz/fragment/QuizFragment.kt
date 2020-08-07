@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.richstern.doggos.randomimagequiz.R
+import com.richstern.doggos.randomimagequiz.statemachine.QuizEvent
 import com.richstern.doggos.randomimagequiz.statemachine.QuizState
 import com.richstern.doggos.randomimagequiz.view.QuizErrorView
 import com.richstern.doggos.randomimagequiz.view.QuizLoadingView
@@ -34,6 +35,12 @@ class QuizFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setListeners()
+        observeState()
+        quizViewModel.triggerEvent(QuizEvent.BeginLoadRandomImage)
+    }
+
+    private fun observeState() {
         quizViewModel.quizState.observe(viewLifecycleOwner, Observer { quizState ->
             when (quizState) {
                 is QuizState.Loading -> {
@@ -52,9 +59,18 @@ class QuizFragment : Fragment() {
                 }
             }
         })
-        quizViewModel.quizEffect.observe(viewLifecycleOwner, Observer { quizEffect ->
+    }
 
-        })
+    private fun setListeners() {
+        quizView?.listener = object : QuizView.Listener {
+            override fun onHelpClicked() {
+                quizViewModel.triggerEvent(QuizEvent.Help)
+            }
+
+            override fun onSubmitClicked() {
+
+            }
+        }
     }
 
     companion object {

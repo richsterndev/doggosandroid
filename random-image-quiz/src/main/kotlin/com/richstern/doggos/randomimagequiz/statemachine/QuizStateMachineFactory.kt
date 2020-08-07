@@ -5,15 +5,7 @@ import javax.inject.Inject
 
 class QuizStateMachineFactory @Inject constructor() {
 
-    interface OnStateTransitionListener {
-        fun onStateTransition(
-            transition: StateMachine.Transition.Valid<QuizState, QuizEvent, QuizEffect>
-        )
-    }
-
-    fun create(
-        transitionListener: OnStateTransitionListener? = null
-    ): StateMachine<QuizState, QuizEvent, QuizEffect> {
+    fun create(): StateMachine<QuizState, QuizEvent, QuizEffect> {
         return StateMachine.create {
 
             initialState(QuizState.Initialized)
@@ -32,19 +24,14 @@ class QuizStateMachineFactory @Inject constructor() {
                 on<QuizEvent.LoadRandomImageSuccess> { event ->
                     transitionTo(QuizState.RandomImageLoaded(event.randomImage))
                 }
+
+                on<QuizEvent.LoadRandomImageError> { event ->
+                    transitionTo(QuizState.RandomImageError(event.throwable))
+                }
             }
             
             // Loaded state
             state<QuizState.RandomImageLoaded> {
-            }
-
-            // On Transition listener
-            onTransition { transition ->
-                transitionListener?.apply {
-                    (transition as? StateMachine.Transition.Valid)?.let { validTransition ->
-                        onStateTransition(validTransition)
-                    }
-                }
             }
         }
     }

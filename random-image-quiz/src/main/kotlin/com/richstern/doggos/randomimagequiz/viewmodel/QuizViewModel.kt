@@ -17,25 +17,19 @@ class QuizViewModel @ViewModelInject constructor(
 
     val quizState: LiveData<QuizState>
         get() = Transformations.distinctUntilChanged(_quizState)
-    val quizEffect: LiveData<QuizEffect>
-        get() = _quizEffect
 
-    private val stateMachineListener = object :
-        QuizStateMachineFactory.OnStateTransitionListener {
-        override fun onStateTransition(
-            transition: StateMachine.Transition.Valid<QuizState, QuizEvent, QuizEffect>
-        ) {
-            _quizState.value = transition.toState
-            _quizEffect.value = transition.sideEffect
-        }
-    }
-
-    private val stateMachine = stateMachineFactory.create(stateMachineListener)
+    private val stateMachine = stateMachineFactory.create()
     private val _quizState = MutableLiveData<QuizState>()
-    private val _quizEffect = MutableLiveData<QuizEffect>()
 
-    init {
-        stateMachine.transition(QuizEvent.BeginLoadRandomImage)
+    fun triggerEvent(event: QuizEvent) {
+        val transition = stateMachine.transition(event)
+
+        if (transition is StateMachine.Transition.Valid) {
+            _quizState.value = stateMachine.state
+            transition.sideEffect?.run {
+                handleSideEffect(this)
+            }
+        }
     }
 
     fun load() {
@@ -43,10 +37,13 @@ class QuizViewModel @ViewModelInject constructor(
             kotlin.runCatching {
                 requireNotNull(loadRandomImage())
             }.onSuccess { breed ->
-                stateMachine.transition(QuizEvent.LoadRandomImageSuccess(breed))
+                triggerEvent(QuizEvent.LoadRandomImageSuccess(breed))
             }.onFailure { exception ->
-                stateMachine.transition(QuizEvent.LoadRandomImageError(exception))
+                triggerEvent(QuizEvent.LoadRandomImageError(exception))
             }
         }
+    }
+
+    private fun handleSideEffect(quizEffect: QuizEffect) {
     }
 }
