@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ScrollView
-import androidx.core.view.isVisible
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -30,7 +30,7 @@ class QuizView(context: Context, attrs: AttributeSet) : ScrollView(context, attr
     private val submitButton by lazy { findViewById<View>(R.id.quiz_view_submit) }
 
     init {
-        View.inflate(context, R.layout.view_quiz, this)
+        inflate(context, R.layout.view_quiz, this)
         helpButton.setOnClickListener {
             listener?.onHelpClicked()
         }
@@ -71,6 +71,18 @@ class QuizView(context: Context, attrs: AttributeSet) : ScrollView(context, attr
         if (quizState.withHint) {
             inputTextView.setText(quizState.randomImage.name)
         }
+
+        if (quizState.withIncorrectGuess) {
+            Toast.makeText(
+                context,
+                "Incorrect guess.  Try again!",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    fun reset() {
+        inputTextView.text = null
     }
 
     private fun displayShimmerView() {

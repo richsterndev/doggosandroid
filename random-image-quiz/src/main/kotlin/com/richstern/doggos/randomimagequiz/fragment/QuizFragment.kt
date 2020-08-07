@@ -14,6 +14,7 @@ import com.richstern.doggos.randomimagequiz.statemachine.QuizEvent
 import com.richstern.doggos.randomimagequiz.statemachine.QuizState
 import com.richstern.doggos.randomimagequiz.view.QuizErrorView
 import com.richstern.doggos.randomimagequiz.view.QuizLoadingView
+import com.richstern.doggos.randomimagequiz.view.QuizSuccessView
 import com.richstern.doggos.randomimagequiz.view.QuizView
 import com.richstern.doggos.randomimagequiz.viewmodel.QuizViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,6 +26,7 @@ class QuizFragment : Fragment() {
     private val quizView by lazy { view?.findViewById<QuizView>(R.id.quiz_view) }
     private val quizLoadingView by lazy { view?.findViewById<QuizLoadingView>(R.id.quiz_loading_view) }
     private val quizErrorView by lazy { view?.findViewById<QuizErrorView>(R.id.quiz_error_view) }
+    private val quizSuccessView by lazy { view?.findViewById<QuizSuccessView>(R.id.quiz_success_view) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,13 +49,20 @@ class QuizFragment : Fragment() {
                 is QuizState.Loading -> setLoadingState()
                 is QuizState.RandomImageLoaded -> bindLoadedImage(quizState)
                 is QuizState.HelpRequested -> displayHelpDialog()
-                is QuizState.Success -> displaySuccess()
+                is QuizState.Success -> displaySuccess(quizState)
             }
         })
     }
 
-    private fun displaySuccess() {
-        quizView?.isVisible = false
+    private fun displaySuccess(quizState: QuizState.Success) {
+        quizView?.let { view ->
+            view.isVisible = false
+            view.reset()
+        }
+        quizSuccessView?.let { view ->
+            view.isVisible = true
+            view.bind(quizState)
+        }
     }
 
     private fun displayHelpDialog() {
@@ -76,6 +85,7 @@ class QuizFragment : Fragment() {
     private fun bindLoadedImage(quizState: QuizState.RandomImageLoaded) {
         quizLoadingView?.isVisible = false
         quizErrorView?.isVisible = false
+        quizSuccessView?.isVisible = false
         quizView?.let { view ->
             view.isVisible = true
             view.bind(quizState)
@@ -86,6 +96,7 @@ class QuizFragment : Fragment() {
         quizView?.isVisible = false
         quizLoadingView?.isVisible = true
         quizErrorView?.isVisible = false
+        quizSuccessView?.isVisible = false
         quizViewModel.load()
     }
 
@@ -97,6 +108,11 @@ class QuizFragment : Fragment() {
 
             override fun onSubmitClicked(guess: String) {
                 quizViewModel.triggerEvent(QuizEvent.Submit(guess))
+            }
+        }
+        quizSuccessView?.listener = object : QuizSuccessView.Listener {
+            override fun onStartOver() {
+                quizViewModel.triggerEvent(QuizEvent.BeginLoadRandomImage)
             }
         }
     }

@@ -21,4 +21,10 @@
         android:layout_height="match_parent"
         android:visibility="gone" />
 
+    <com.richstern.doggos.randomimagequiz.view.QuizSuccessView
+        android:id="@+id/quiz_success_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
 </FrameLayout>
