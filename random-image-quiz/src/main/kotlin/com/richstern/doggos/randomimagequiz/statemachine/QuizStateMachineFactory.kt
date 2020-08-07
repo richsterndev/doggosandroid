@@ -32,6 +32,22 @@ class QuizStateMachineFactory @Inject constructor() {
             
             // Loaded state
             state<QuizState.RandomImageLoaded> {
+
+                on<QuizEvent.Help> {
+                    transitionTo(QuizState.HelpRequested(randomImage))
+                }
+            }
+
+            // Help Requested
+            state<QuizState.HelpRequested> {
+
+                on<QuizEvent.HelpConfirmed> {
+                    transitionTo(QuizState.RandomImageLoaded(randomImage, withHint = true))
+                }
+
+                on<QuizEvent.HelpDeclined> {
+                    transitionTo(QuizState.RandomImageLoaded(randomImage))
+                }
             }
         }
     }

@@ -1,9 +1,11 @@
 package com.richstern.doggos.randomimagequiz.fragment
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -43,22 +45,44 @@ class QuizFragment : Fragment() {
     private fun observeState() {
         quizViewModel.quizState.observe(viewLifecycleOwner, Observer { quizState ->
             when (quizState) {
-                is QuizState.Loading -> {
-                    quizView?.isVisible = false
-                    quizLoadingView?.isVisible = true
-                    quizErrorView?.isVisible = false
-                    quizViewModel.load()
-                }
-                is QuizState.RandomImageLoaded -> {
-                    quizLoadingView?.isVisible = false
-                    quizErrorView?.isVisible = false
-                    quizView?.let { view ->
-                        view.isVisible = true
-                        view.bind(quizState)
-                    }
-                }
+                is QuizState.Loading -> setLoadingState()
+                is QuizState.RandomImageLoaded -> bindLoadedImage(quizState)
+                is QuizState.HelpRequested -> displayHelpDialog()
             }
         })
+    }
+
+    private fun displayHelpDialog() {
+        context?.let { ctx ->
+            AlertDialog.Builder(ctx).apply {
+                setTitle("Need help with this breed?")
+                setMessage("Click OK to solve this quiz or CANCEL to go back.")
+                setPositiveButton("OK") { _, _ ->
+                    quizViewModel.triggerEvent(QuizEvent.HelpConfirmed)
+                }
+                setNegativeButton("Cancel") { _, _ ->
+                    quizViewModel.triggerEvent(QuizEvent.HelpDeclined)
+                }
+                setCancelable(false)
+                show()
+            }
+        }
+    }
+
+    private fun bindLoadedImage(quizState: QuizState.RandomImageLoaded) {
+        quizLoadingView?.isVisible = false
+        quizErrorView?.isVisible = false
+        quizView?.let { view ->
+            view.isVisible = true
+            view.bind(quizState)
+        }
+    }
+
+    private fun setLoadingState() {
+        quizView?.isVisible = false
+        quizLoadingView?.isVisible = true
+        quizErrorView?.isVisible = false
+        quizViewModel.load()
     }
 
     private fun setListeners() {

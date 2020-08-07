@@ -3,6 +3,7 @@ package com.richstern.doggos.randomimagequiz.view
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ScrollView
 import com.bumptech.glide.Glide
@@ -13,6 +14,7 @@ class QuizView(context: Context, attrs: AttributeSet) : ScrollView(context, attr
 
     var listener: Listener? = null
 
+    private val inputTextView by lazy { findViewById<EditText>(R.id.quiz_view_breed_input) }
     private val helpButton by lazy { findViewById<View>(R.id.quiz_help) }
     private val imageView by lazy { findViewById<ImageView>(R.id.quiz_view_image) }
     private val submitButton by lazy { findViewById<View>(R.id.quiz_view_submit) }
@@ -32,6 +34,10 @@ class QuizView(context: Context, attrs: AttributeSet) : ScrollView(context, attr
             .load(quizState.randomImage.imageUrl)
             .centerCrop()
             .into(imageView)
+
+        if (quizState.withHint) {
+            inputTextView.setText(quizState.randomImage.name)
+        }
     }
 
     interface Listener {

@@ -10,6 +10,7 @@ dependencies {
     implementation libs.androidx.lifecycle.viewmodel
     implementation libs.ktx.fragment
     implementation libs.stateMachine
+    implementation libs.lottie
 
     // Glide
     implementation libs.glide.core

@@ -6,10 +6,14 @@ sealed class QuizState {
     object Initialized : QuizState()
     object Loading : QuizState()
     data class RandomImageLoaded(
-        val randomImage: Breed
+        val randomImage: Breed,
+        var withHint: Boolean = false
     ) : QuizState()
     data class RandomImageError(
         val throwable: Throwable
+    ) : QuizState()
+    data class HelpRequested(
+        val randomImage: Breed
     ) : QuizState()
 }
 
@@ -22,8 +26,9 @@ sealed class QuizEvent {
         val throwable: Throwable
     ) : QuizEvent()
     object Help : QuizEvent()
+    object HelpConfirmed : QuizEvent()
+    object HelpDeclined : QuizEvent()
 }
 
 sealed class QuizEffect {
-
 }

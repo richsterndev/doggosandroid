@@ -8,6 +8,7 @@ import com.richstern.doggos.randomimagequiz.statemachine.QuizState
 import com.richstern.doggos.randomimagequiz.statemachine.QuizStateMachineFactory
 import com.richstern.doggos.randomimagequiz.usecase.LoadRandomImage
 import com.tinder.StateMachine
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class QuizViewModel @ViewModelInject constructor(
@@ -34,6 +35,7 @@ class QuizViewModel @ViewModelInject constructor(
 
     fun load() {
         viewModelScope.launch {
+            delay(2_000)
             kotlin.runCatching {
                 requireNotNull(loadRandomImage())
             }.onSuccess { breed ->
@@ -45,5 +47,6 @@ class QuizViewModel @ViewModelInject constructor(
     }
 
     private fun handleSideEffect(quizEffect: QuizEffect) {
+
     }
 }
