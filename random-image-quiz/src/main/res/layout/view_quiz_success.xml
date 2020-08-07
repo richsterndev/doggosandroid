@@ -8,12 +8,13 @@
 
     <ImageView
         android:id="@+id/quiz_success_image"
-        android:layout_width="0dp"
-        android:layout_height="240dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_marginStart="48dp"
         android:layout_marginEnd="48dp"
         android:background="#EFEFEF"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="w,1:1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,10 +23,11 @@
         android:id="@+id/quiz_success_animation_single"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@id/quiz_success_headline"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="false"
         app:lottie_loop="false"
         app:lottie_rawRes="@raw/confetti1" />
@@ -53,41 +55,40 @@
         android:id="@+id/quiz_success_headline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:text="@string/that_is_correct"
         android:layout_marginBottom="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="@string/that_is_correct"
+        android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@id/quiz_success_image"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
         android:id="@+id/quiz_success_breed_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        tools:text="Whippet"
         android:layout_marginTop="16dp"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/quiz_success_image"
-        app:layout_constraintRight_toRightOf="parent" />
+        tools:text="Whippet" />
 
     <Button
         android:id="@+id/quiz_success_start_over"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:layout_marginStart="48dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="24dp"
+        android:background="@drawable/submit_button_background"
+        android:elevation="4dp"
         android:text="@string/start_over"
         android:textColor="#FFF"
         android:textSize="22sp"
-        android:elevation="4dp"
-        android:background="@drawable/submit_button_background"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/quiz_success_breed_name"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/quiz_success_breed_name" />
 
 </merge>

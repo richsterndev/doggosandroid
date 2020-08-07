@@ -21,7 +21,8 @@ class MainViewPagerAdapter(
         }
     }
 
-    private enum class Tabs {
-        QUIZ, QUIZ_HISTORY
+    enum class Tabs(val displayName: String) {
+        QUIZ("Quiz"),
+        QUIZ_HISTORY("History")
     }
 }
