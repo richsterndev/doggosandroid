@@ -11,6 +11,7 @@ dependencies {
     implementation libs.ktx.fragment
     implementation libs.stateMachine
     implementation libs.lottie
+    implementation libs.fbShimmer
 
     // Glide
     implementation libs.glide.core

@@ -1,9 +1,12 @@
 package com.richstern.doggos.randomimagequiz.statemachine
 
+import com.richstern.doggos.randomimagequiz.usecase.ValidateQuizGuess
 import com.tinder.StateMachine
 import javax.inject.Inject
 
-class QuizStateMachineFactory @Inject constructor() {
+class QuizStateMachineFactory @Inject constructor(
+    private val validateQuizGuess: ValidateQuizGuess
+) {
 
     fun create(): StateMachine<QuizState, QuizEvent, QuizEffect> {
         return StateMachine.create {
@@ -36,6 +39,20 @@ class QuizStateMachineFactory @Inject constructor() {
                 on<QuizEvent.Help> {
                     transitionTo(QuizState.HelpRequested(randomImage))
                 }
+
+                on<QuizEvent.HelpConfirmed> {
+                    transitionTo(QuizState.RandomImageLoaded(randomImage, withHint = true))
+                }
+
+                on<QuizEvent.Submit> { event ->
+                    if (validateQuizGuess(event.guess, randomImage)) {
+                        transitionTo(QuizState.Success(randomImage))
+                    } else {
+                        transitionTo(
+                            QuizState.RandomImageLoaded(randomImage, withIncorrectGuess = true)
+                        )
+                    }
+                }
             }
 
             // Help Requested
@@ -48,6 +65,11 @@ class QuizStateMachineFactory @Inject constructor() {
                 on<QuizEvent.HelpDeclined> {
                     transitionTo(QuizState.RandomImageLoaded(randomImage))
                 }
+            }
+
+            // Success (correct guess)
+            state<QuizState.Success> {
+
             }
         }
     }

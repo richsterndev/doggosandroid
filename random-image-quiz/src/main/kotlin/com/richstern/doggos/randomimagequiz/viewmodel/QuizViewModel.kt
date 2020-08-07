@@ -35,7 +35,7 @@ class QuizViewModel @ViewModelInject constructor(
 
     fun load() {
         viewModelScope.launch {
-            delay(2_000)
+            delay(1_000)
             kotlin.runCatching {
                 requireNotNull(loadRandomImage())
             }.onSuccess { breed ->

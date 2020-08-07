@@ -1,6 +1,5 @@
 package com.richstern.doggos.randomimagequiz.fragment
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -48,8 +47,13 @@ class QuizFragment : Fragment() {
                 is QuizState.Loading -> setLoadingState()
                 is QuizState.RandomImageLoaded -> bindLoadedImage(quizState)
                 is QuizState.HelpRequested -> displayHelpDialog()
+                is QuizState.Success -> displaySuccess()
             }
         })
+    }
+
+    private fun displaySuccess() {
+        quizView?.isVisible = false
     }
 
     private fun displayHelpDialog() {
@@ -91,8 +95,8 @@ class QuizFragment : Fragment() {
                 quizViewModel.triggerEvent(QuizEvent.Help)
             }
 
-            override fun onSubmitClicked() {
-
+            override fun onSubmitClicked(guess: String) {
+                quizViewModel.triggerEvent(QuizEvent.Submit(guess))
             }
         }
     }

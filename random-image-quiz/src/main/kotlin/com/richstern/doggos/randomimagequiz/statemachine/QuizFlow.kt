@@ -7,12 +7,16 @@ sealed class QuizState {
     object Loading : QuizState()
     data class RandomImageLoaded(
         val randomImage: Breed,
-        var withHint: Boolean = false
+        var withHint: Boolean = false,
+        var withIncorrectGuess: Boolean = false
     ) : QuizState()
     data class RandomImageError(
         val throwable: Throwable
     ) : QuizState()
     data class HelpRequested(
+        val randomImage: Breed
+    ) : QuizState()
+    data class Success(
         val randomImage: Breed
     ) : QuizState()
 }
@@ -28,6 +32,9 @@ sealed class QuizEvent {
     object Help : QuizEvent()
     object HelpConfirmed : QuizEvent()
     object HelpDeclined : QuizEvent()
+    data class Submit(
+        val guess: String
+    ) : QuizEvent()
 }
 
 sealed class QuizEffect {
