@@ -66,6 +66,7 @@ class QuizStateMachineFactory @Inject constructor(
                 }
             }
 
+            // Error loading state
             state<QuizState.RandomImageError> {
 
                 on<QuizEvent.ErrorTryAgain> {
