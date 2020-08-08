@@ -2,6 +2,7 @@ package com.richstern.doggos.randomimagequiz.viewmodel
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import com.richstern.doggos.persistence.usecase.LoadAllBreeds
 import com.richstern.doggos.randomimagequiz.statemachine.QuizEffect
 import com.richstern.doggos.randomimagequiz.statemachine.QuizEvent
 import com.richstern.doggos.randomimagequiz.statemachine.QuizState
@@ -13,8 +14,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class QuizViewModel @ViewModelInject constructor(
-    private var loadRandomImage: LoadRandomImage,
+    private val loadRandomImage: LoadRandomImage,
     private val saveBreed: SaveBreed,
+    private val loadAllBreeds: LoadAllBreeds,
     stateMachineFactory: QuizStateMachineFactory
 ) : ViewModel() {
 
@@ -49,6 +51,11 @@ class QuizViewModel @ViewModelInject constructor(
                 triggerEvent(QuizEvent.LoadRandomImageError(exception))
             }
         }
+
+        viewModelScope.launch {
+            val savedBreeds = loadAllBreeds()
+            val count = savedBreeds.size
+        }
     }
 
     private fun handleSideEffect(quizEffect: QuizEffect) {
@@ -59,6 +66,10 @@ class QuizViewModel @ViewModelInject constructor(
     }
 
     private fun saveResult(quizEffect: QuizEffect.SaveResult) {
-//        saveBreed(quizEffect.randomImage)
+        viewModelScope.launch {
+            kotlin.runCatching {
+                saveBreed(quizEffect.randomImage)
+            }
+        }
     }
 }

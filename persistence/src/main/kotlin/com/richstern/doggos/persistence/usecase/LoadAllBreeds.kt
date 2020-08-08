@@ -9,7 +9,7 @@ class LoadAllBreeds @Inject constructor(
     private val breedDao: BreedDao,
     private val adaptToBreed: AdaptToBreed
 ) {
-    operator fun invoke(): List<Breed> =
+    suspend operator fun invoke(): List<Breed> =
         breedDao.getAll().map {
             adaptToBreed(it)
         }

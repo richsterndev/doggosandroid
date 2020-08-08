@@ -9,7 +9,7 @@ class SaveBreed @Inject constructor(
     private val breedDao: BreedDao,
     private val adaptToBreedEntity: AdaptToBreedEntity
 ) {
-    operator fun invoke(breed: Breed) {
+    suspend operator fun invoke(breed: Breed) {
         breedDao.insert(adaptToBreedEntity(breed))
     }
 }

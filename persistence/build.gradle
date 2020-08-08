@@ -5,6 +5,7 @@ dependencies {
 
     // Room
     implementation libs.room.core
+    implementation libs.room.ktx
     kapt libs.room.compiler
 
     // Hilt

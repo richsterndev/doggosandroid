@@ -8,8 +8,8 @@ import androidx.room.Query
 @Dao
 interface BreedDao {
     @Query("SELECT * from breeds")
-    fun getAll(): List<BreedEntity>
+    suspend fun getAll(): List<BreedEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(breedEntity: BreedEntity)
+    suspend fun insert(breedEntity: BreedEntity)
 }
