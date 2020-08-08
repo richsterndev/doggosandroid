@@ -33,6 +33,7 @@ sealed class QuizEvent {
     data class Submit(
         val guess: String
     ) : QuizEvent()
+    object ErrorTryAgain: QuizEvent()
 }
 
 sealed class QuizEffect {

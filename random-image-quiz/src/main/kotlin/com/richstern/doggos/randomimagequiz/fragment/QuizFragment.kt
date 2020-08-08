@@ -51,6 +51,7 @@ class QuizFragment : Fragment() {
                 is QuizState.RandomImageLoaded -> bindLoadedImage(quizState)
                 is QuizState.HelpRequested -> displayHelpDialog()
                 is QuizState.Success -> displaySuccess(quizState)
+                is QuizState.RandomImageError -> displayError()
             }
         })
         quizViewModel.quizEffect.observe(viewLifecycleOwner, Observer { quizEffect ->
@@ -59,6 +60,13 @@ class QuizFragment : Fragment() {
                 is QuizEffect.DisplayHint -> quizView?.onDisplayHint(quizEffect)
             }
         })
+    }
+
+    private fun displayError() {
+        quizLoadingView?.isVisible = false
+        quizErrorView?.isVisible = true
+        quizSuccessView?.isVisible = false
+        quizView?.isVisible = false
     }
 
     private fun displaySuccess(quizState: QuizState.Success) {
@@ -123,6 +131,11 @@ class QuizFragment : Fragment() {
         quizSuccessView?.listener = object : QuizSuccessView.Listener {
             override fun onStartOver() {
                 quizViewModel.triggerEvent(QuizEvent.BeginLoadRandomImage)
+            }
+        }
+        quizErrorView?.listener = object : QuizErrorView.Listener {
+            override fun onTryAgain() {
+                quizViewModel.triggerEvent(QuizEvent.ErrorTryAgain)
             }
         }
     }

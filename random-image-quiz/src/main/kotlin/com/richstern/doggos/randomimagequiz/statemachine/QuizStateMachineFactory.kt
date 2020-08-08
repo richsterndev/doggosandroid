@@ -66,6 +66,13 @@ class QuizStateMachineFactory @Inject constructor(
                 }
             }
 
+            state<QuizState.RandomImageError> {
+
+                on<QuizEvent.ErrorTryAgain> {
+                    transitionTo(QuizState.Loading)
+                }
+            }
+
             // Success (correct guess)
             state<QuizState.Success> {
 
