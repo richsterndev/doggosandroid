@@ -41,4 +41,7 @@ sealed class QuizEffect {
         val name: String
     ) : QuizEffect()
     object IncorrectGuess : QuizEffect()
+    data class SaveResult(
+        val randomImage: Breed
+    ) : QuizEffect()
 }

@@ -44,7 +44,10 @@ class QuizStateMachineFactory @Inject constructor(
 
                 on<QuizEvent.Submit> { event ->
                     if (validateQuizGuess(event.guess, randomImage)) {
-                        transitionTo(QuizState.Success(randomImage))
+                        transitionTo(
+                            state = QuizState.Success(randomImage),
+                            sideEffect = QuizEffect.SaveResult(randomImage)
+                        )
                     } else {
                         dontTransition(QuizEffect.IncorrectGuess)
                     }

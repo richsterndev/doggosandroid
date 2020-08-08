@@ -1,0 +1,15 @@
+apply from: configs.kotlin.androidLibrary
+
+dependencies {
+    implementation libs.model
+
+    // Room
+    implementation libs.room.core
+    kapt libs.room.compiler
+
+    // Hilt
+    implementation libs.hilt.android
+    implementation libs.hilt.lifecycle
+    kapt libs.hilt.androidCompiler
+    kapt libs.hilt.compiler
+}

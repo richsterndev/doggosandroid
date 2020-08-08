@@ -18,6 +18,7 @@ ext.versions = [
     minSdk: 27,
     moshi: '1.9.2',
     retrofit: '2.9.0',
+    room: '2.2.5',
     stateMachine: '0.2.0'
 ]
 
@@ -62,8 +63,14 @@ ext.libs = [
         core: "com.squareup.moshi:moshi:${versions.moshi}",
         kotlin: "com.squareup.moshi:moshi-kotlin:${versions.moshi}"
     ],
-    stateMachine: "com.tinder.statemachine:statemachine:${versions.stateMachine}",
-    randomImageQuiz: project(":random-image-quiz")
+    persistence: project(":persistence"),
+    randomImageQuiz: project(":random-image-quiz"),
+    room: [
+        core: "androidx.room:room-runtime:${versions.room}",
+        compiler: "androidx.room:room-compiler:${versions.room}",
+        ktx: "androidx.room:room-ktx:${versions.room}"
+    ],
+    stateMachine: "com.tinder.statemachine:statemachine:${versions.stateMachine}"
 ]
 
 ext.configs = [

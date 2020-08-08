@@ -7,12 +7,14 @@ import com.richstern.doggos.randomimagequiz.statemachine.QuizEvent
 import com.richstern.doggos.randomimagequiz.statemachine.QuizState
 import com.richstern.doggos.randomimagequiz.statemachine.QuizStateMachineFactory
 import com.richstern.doggos.randomimagequiz.usecase.LoadRandomImage
+import com.richstern.doggos.persistence.usecase.SaveBreed
 import com.tinder.StateMachine
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class QuizViewModel @ViewModelInject constructor(
     private var loadRandomImage: LoadRandomImage,
+    private val saveBreed: SaveBreed,
     stateMachineFactory: QuizStateMachineFactory
 ) : ViewModel() {
 
@@ -51,5 +53,12 @@ class QuizViewModel @ViewModelInject constructor(
 
     private fun handleSideEffect(quizEffect: QuizEffect) {
         _quizEffect.value = quizEffect
+        when (quizEffect) {
+            is QuizEffect.SaveResult -> saveResult(quizEffect)
+        }
+    }
+
+    private fun saveResult(quizEffect: QuizEffect.SaveResult) {
+//        saveBreed(quizEffect.randomImage)
     }
 }

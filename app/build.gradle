@@ -50,16 +50,20 @@ dependencies {
     implementation libs.hilt.lifecycle
     kapt libs.hilt.androidCompiler
     kapt libs.hilt.compiler
+    
+    // Room
+    implementation libs.room.core
+    kapt libs.room.compiler
 
     // Projects
+    implementation libs.core
     implementation libs.model
+    implementation libs.persistence
     implementation libs.randomImageQuiz
 
     // Arch components
     implementation libs.androidx.lifecycle.extensions
     implementation libs.androidx.lifecycle.viewmodel
-
-    implementation libs.core
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

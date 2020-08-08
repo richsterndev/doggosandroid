@@ -2,13 +2,16 @@ apply from: configs.kotlin.androidLibrary
 apply plugin: 'dagger.hilt.android.plugin'
 
 dependencies {
+    implementation libs.model
+
     // Hilt
     implementation libs.hilt.android
     kapt libs.hilt.androidCompiler
     kapt libs.hilt.compiler
 
-    // Model
-    implementation libs.model
+    // Room DB
+    implementation libs.room.core
+    kapt libs.room.compiler
 
     // Retrofit + Moshi
     api "com.squareup.retrofit2:retrofit:${versions.retrofit}"
