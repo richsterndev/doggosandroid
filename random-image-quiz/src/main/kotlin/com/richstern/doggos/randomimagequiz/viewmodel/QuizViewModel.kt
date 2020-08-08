@@ -51,11 +51,6 @@ class QuizViewModel @ViewModelInject constructor(
                 triggerEvent(QuizEvent.LoadRandomImageError(exception))
             }
         }
-
-        viewModelScope.launch {
-            val savedBreeds = loadAllBreeds()
-            val count = savedBreeds.size
-        }
     }
 
     private fun handleSideEffect(quizEffect: QuizEffect) {
