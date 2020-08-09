@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.richstern.doggos.model.Breed
 import com.richstern.doggos.randomimagequiz.R
 
@@ -39,9 +40,14 @@ class QuizHistoryAdapter : RecyclerView.Adapter<QuizHistoryAdapter.HistoryItemVi
         private val nameTextView by lazy {
             itemView.findViewById<TextView>(R.id.history_item_breed_name)
         }
+        private val imageView by lazy { itemView.findViewById<ImageView>(R.id.history_item_image) }
 
         fun bind(item: Breed) {
             nameTextView.text = item.name
+            Glide.with(itemView)
+                .load(item.imageUrl)
+                .centerCrop()
+                .into(imageView)
         }
 
     }

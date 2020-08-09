@@ -59,6 +59,7 @@ class QuizHistoryFragment : Fragment() {
     private fun setLoadingState() {
         quizHistoryView?.isVisible = false
         quizHistoryLoadingView?.isVisible = true
+        quizHistoryViewModel.load()
     }
 
     private fun setLoadedState(quizHistoryState: QuizHistoryState.HistoryLoaded) {
@@ -70,8 +71,12 @@ class QuizHistoryFragment : Fragment() {
     }
 
     private fun setRefreshingState() {
-        quizHistoryView?.isVisible = true
+        quizHistoryView?.let { view ->
+            view.isVisible = true
+            view.refresh()
+        }
         quizHistoryLoadingView?.isVisible = false
+        quizHistoryViewModel.load()
     }
 
     companion object {

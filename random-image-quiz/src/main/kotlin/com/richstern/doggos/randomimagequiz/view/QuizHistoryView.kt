@@ -20,6 +20,11 @@ class QuizHistoryView(context: Context, attrs: AttributeSet) : SwipeRefreshLayou
     }
 
     fun bind(quizHistoryState: QuizHistoryState.HistoryLoaded) {
+        isRefreshing = false
         adapter.setItems(quizHistoryState.list)
+    }
+
+    fun refresh() {
+        isRefreshing = true
     }
 }

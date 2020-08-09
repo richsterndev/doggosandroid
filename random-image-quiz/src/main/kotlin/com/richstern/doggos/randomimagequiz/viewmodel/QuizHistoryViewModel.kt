@@ -36,7 +36,7 @@ class QuizHistoryViewModel @ViewModelInject constructor(
         }
     }
 
-    init {
+    fun load() {
         viewModelScope.launch {
             loadAllBreeds().collect { list ->
                 triggerEvent(QuizHistoryEvent.LoadHistorySuccess(list))
