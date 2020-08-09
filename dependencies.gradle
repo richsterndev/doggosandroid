@@ -6,6 +6,7 @@ ext.versions = [
         appCompat: '1.1.0',
         constraintLayout: '1.1.3',
         lifecycle: '2.2.0',
+        swipeRefreshLayout: '1.1.0',
         viewPager2: '1.0.0'
     ],
     compileSdk: 29,
@@ -34,6 +35,9 @@ ext.libs = [
             extensions: "androidx.lifecycle:lifecycle-extensions:${versions.androidx.lifecycle}",
             viewmodel: "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.androidx.lifecycle}"
         ],
+        swipeRefreshLayout:
+            "androidx.swiperefreshlayout:swiperefreshlayout:" +
+                "${versions.androidx.swipeRefreshLayout}",
         viewPager2: "androidx.viewpager2:viewpager2:${versions.androidx.viewPager2}"
     ],
     core: project(":core"),

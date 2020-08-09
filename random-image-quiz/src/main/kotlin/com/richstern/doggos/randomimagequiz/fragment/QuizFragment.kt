@@ -44,6 +44,28 @@ class QuizFragment : Fragment() {
         quizViewModel.triggerEvent(QuizEvent.BeginLoadRandomImage)
     }
 
+    private fun setListeners() {
+        quizView?.listener = object : QuizView.Listener {
+            override fun onHelpClicked() {
+                quizViewModel.triggerEvent(QuizEvent.Help)
+            }
+
+            override fun onSubmitClicked(guess: String) {
+                quizViewModel.triggerEvent(QuizEvent.Submit(guess))
+            }
+        }
+        quizSuccessView?.listener = object : QuizSuccessView.Listener {
+            override fun onStartOver() {
+                quizViewModel.triggerEvent(QuizEvent.BeginLoadRandomImage)
+            }
+        }
+        quizErrorView?.listener = object : QuizErrorView.Listener {
+            override fun onTryAgain() {
+                quizViewModel.triggerEvent(QuizEvent.ErrorTryAgain)
+            }
+        }
+    }
+
     private fun observeState() {
         quizViewModel.quizState.observe(viewLifecycleOwner, Observer { quizState ->
             when (quizState) {
@@ -116,28 +138,6 @@ class QuizFragment : Fragment() {
             view.reset()
         }
         quizViewModel.load()
-    }
-
-    private fun setListeners() {
-        quizView?.listener = object : QuizView.Listener {
-            override fun onHelpClicked() {
-                quizViewModel.triggerEvent(QuizEvent.Help)
-            }
-
-            override fun onSubmitClicked(guess: String) {
-                quizViewModel.triggerEvent(QuizEvent.Submit(guess))
-            }
-        }
-        quizSuccessView?.listener = object : QuizSuccessView.Listener {
-            override fun onStartOver() {
-                quizViewModel.triggerEvent(QuizEvent.BeginLoadRandomImage)
-            }
-        }
-        quizErrorView?.listener = object : QuizErrorView.Listener {
-            override fun onTryAgain() {
-                quizViewModel.triggerEvent(QuizEvent.ErrorTryAgain)
-            }
-        }
     }
 
     companion object {
