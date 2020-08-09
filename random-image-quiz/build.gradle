@@ -9,6 +9,7 @@ dependencies {
     implementation libs.androidx.constraintLayout
     implementation libs.androidx.lifecycle.extensions
     implementation libs.androidx.lifecycle.viewmodel
+    implementation libs.androidx.recyclerView
     implementation libs.androidx.swipeRefreshLayout
     implementation libs.ktx.fragment
     implementation libs.stateMachine
