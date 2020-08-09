@@ -16,7 +16,6 @@ import kotlinx.coroutines.launch
 class QuizViewModel @ViewModelInject constructor(
     private val loadRandomImage: LoadRandomImage,
     private val saveBreed: SaveBreed,
-    private val loadAllBreeds: LoadAllBreeds,
     stateMachineFactory: QuizStateMachineFactory
 ) : ViewModel() {
 
