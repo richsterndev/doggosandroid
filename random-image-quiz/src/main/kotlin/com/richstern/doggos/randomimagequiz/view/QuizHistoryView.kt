@@ -10,6 +10,8 @@ import com.richstern.doggos.randomimagequiz.statemachine.QuizHistoryState
 
 class QuizHistoryView(context: Context, attrs: AttributeSet) : SwipeRefreshLayout(context, attrs) {
 
+    var listener: Listener? = null
+
     private val recyclerView by lazy { findViewById<RecyclerView>(R.id.quiz_history_list) }
     private val adapter = QuizHistoryAdapter()
 
@@ -17,6 +19,9 @@ class QuizHistoryView(context: Context, attrs: AttributeSet) : SwipeRefreshLayou
         inflate(context, R.layout.view_quiz_history, this)
         recyclerView.layoutManager = GridLayoutManager(context, 2)
         recyclerView.adapter = adapter
+        setOnRefreshListener {
+            listener?.onRefresh()
+        }
     }
 
     fun bind(quizHistoryState: QuizHistoryState.HistoryLoaded) {
@@ -26,5 +31,9 @@ class QuizHistoryView(context: Context, attrs: AttributeSet) : SwipeRefreshLayou
 
     fun refresh() {
         isRefreshing = true
+    }
+
+    interface Listener {
+        fun onRefresh()
     }
 }

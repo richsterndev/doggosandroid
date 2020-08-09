@@ -41,7 +41,11 @@ class QuizHistoryFragment : Fragment() {
     }
 
     private fun setListeners() {
-
+        quizHistoryView?.listener = object : QuizHistoryView.Listener {
+            override fun onRefresh() {
+                quizHistoryViewModel.triggerEvent(QuizHistoryEvent.Refresh)
+            }
+        }
     }
 
     private fun observeState() {
