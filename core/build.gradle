@@ -14,8 +14,8 @@ dependencies {
     kapt libs.room.compiler
 
     // Retrofit + Moshi
-    api "com.squareup.retrofit2:retrofit:${versions.retrofit}"
-    api "com.squareup.retrofit2:converter-moshi:${versions.retrofit}"
+    api libs.retrofit.core
+    api libs.retrofit.moshiConverter
     api libs.moshi.adapter
     api libs.moshi.core
     api libs.moshi.kotlin

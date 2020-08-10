@@ -71,6 +71,10 @@ ext.libs = [
     ],
     persistence: project(":persistence"),
     randomImageQuiz: project(":random-image-quiz"),
+    retrofit: [
+        core: "com.squareup.retrofit2:retrofit:${versions.retrofit}",
+        moshiConverter: "com.squareup.retrofit2:converter-moshi:${versions.retrofit}"
+    ],
     room: [
         core: "androidx.room:room-runtime:${versions.room}",
         compiler: "androidx.room:room-compiler:${versions.room}",
