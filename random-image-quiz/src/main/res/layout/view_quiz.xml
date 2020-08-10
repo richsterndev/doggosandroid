@@ -103,7 +103,7 @@
             android:elevation="4dp"
             android:text="@string/submit"
             android:textColor="#FFF"
-            android:textSize="22sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
