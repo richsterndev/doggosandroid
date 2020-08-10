@@ -41,7 +41,9 @@ class QuizViewModel @ViewModelInject constructor(
 
     fun load() {
         viewModelScope.launch {
+            // Add an artificial delay to show the loading animation
             delay(1_000)
+
             kotlin.runCatching {
                 requireNotNull(loadRandomImage())
             }.onSuccess { breed ->
